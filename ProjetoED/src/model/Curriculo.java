@@ -2,11 +2,10 @@ package model;
 import java.awt.image.BufferedImage;
 
 public class Curriculo {
-
 	private Long id;
 	private Boolean genero;
 	private Integer idade;
-	private Long CPF;
+	private Long cPF;
 	private BufferedImage[] documentos;
 	
 	public Long getId() {
@@ -34,11 +33,11 @@ public class Curriculo {
 	}
 	
 	public Long getCPF() {
-		return CPF;
+		return cPF;
 	}
 	
 	public void setCPF(Long cPF) {
-		CPF = cPF;
+		cPF = cPF;
 	}
 	
 	public BufferedImage[] getDocumentos() {
@@ -48,5 +47,4 @@ public class Curriculo {
 	public void setDocumentos(BufferedImage[] documentos) {
 		this.documentos = documentos;
 	}
-	
 }

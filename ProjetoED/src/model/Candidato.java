@@ -1,10 +1,9 @@
 package model;
 
 public class Candidato {
-
 	private Long idCurriculo;
 	private Long idInscricao;
-	private String Email;
+	private String email;
 	
 	public Long getIdCurriculo() {
 		return idCurriculo;
@@ -23,11 +22,11 @@ public class Candidato {
 	}
 	
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	
 	public void setEmail(String email) {
-		Email = email;
+		email = email;
 	}
 	
 	private void AlterarIncrição() {

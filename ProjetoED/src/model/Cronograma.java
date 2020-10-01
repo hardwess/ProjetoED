@@ -2,15 +2,14 @@ package model;
 import java.util.Date;
 
 public class Cronograma {
-
 	private Long id;
-	private Date DataInscricao;
-	private Date DataCurriculo;
-	private Date DataEntrevista;
-	private Date DataResultadoPre;
-	private Date DataResultado;
-	private Date DataMatricula;
-	private Date DataSegundaChamada;
+	private Date dataInscricao;
+	private Date dataCurriculo;
+	private Date dataEntrevista;
+	private Date dataResultadoPre;
+	private Date dataResultado;
+	private Date dataMatricula;
+	private Date dataSegundaChamada;
 
 	public Long getId() {
 		return id;
@@ -21,59 +20,58 @@ public class Cronograma {
 	}
 
 	public Date getDataInscricao() {
-		return DataInscricao;
+		return dataInscricao;
 	}
 
 	public void setDataInscricao(Date dataInscricao) {
-		DataInscricao = dataInscricao;
+		dataInscricao = dataInscricao;
 	}
 
 	public Date getDataCurriculo() {
-		return DataCurriculo;
+		return dataCurriculo;
 	}
 
 	public void setDataCurriculo(Date dataCurriculo) {
-		DataCurriculo = dataCurriculo;
+		dataCurriculo = dataCurriculo;
 	}
 
 	public Date getDataEntrevista() {
-		return DataEntrevista;
+		return dataEntrevista;
 	}
 
 	public void setDataEntrevista(Date dataEntrevista) {
-		DataEntrevista = dataEntrevista;
+		dataEntrevista = dataEntrevista;
 	}
 
 	public Date getDataResultadoPre() {
-		return DataResultadoPre;
+		return dataResultadoPre;
 	}
 
 	public void setDataResultadoPre(Date dataResultadoPre) {
-		DataResultadoPre = dataResultadoPre;
+		dataResultadoPre = dataResultadoPre;
 	}
 
 	public Date getDataResultado() {
-		return DataResultado;
+		return dataResultado;
 	}
 
 	public void setDataResultado(Date dataResultado) {
-		DataResultado = dataResultado;
+		dataResultado = dataResultado;
 	}
 
 	public Date getDataMatricula() {
-		return DataMatricula;
+		return dataMatricula;
 	}
 
 	public void setDataMatricula(Date dataMatricula) {
-		DataMatricula = dataMatricula;
+		dataMatricula = dataMatricula;
 	}
 
 	public Date getDataSegundaChamada() {
-		return DataSegundaChamada;
+		return dataSegundaChamada;
 	}
 
 	public void setDataSegundaChamada(Date dataSegundaChamada) {
-		DataSegundaChamada = dataSegundaChamada;
+		dataSegundaChamada = dataSegundaChamada;
 	}
-
 }
