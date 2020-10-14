@@ -12,9 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JScrollBar;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -89,6 +92,7 @@ public class Inscricoes extends JFrame {
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{new Integer(1234), "teste@gmail.com", "bot\u00E3o", "Aprovar | Reprovar"},
+				{new Integer(1234), "teste@gmail.com", "bot\u00E3o", "Aprovar | Reprovar"},
 			},
 			new String[] {
 				"N\u00B0 curr\u00EDculo", "E-mail", "Documentos", "A\u00E7\u00F5es"
@@ -101,12 +105,20 @@ public class Inscricoes extends JFrame {
 				return columnEditables[column];
 			}
 		});
-		/**if (table.getMouseListeners() != null) {
-			Curriculo curriculo = new Curriculo();
-			curriculo.setAlwaysOnTop(true);
-			curriculo.setVisible(true);
-			table.getSelectionModel().addListSelectionListener(arg0); 
-		};**/
+		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override public void valueChanged(ListSelectionEvent evt) {
+				if (evt.getValueIsAdjusting())
+					return; int row = table.getSelectedRow();
+					int column = table.getSelectedColumn();
+					Object selected = table.getModel().getValueAt(row, column);
+					DadosInscricoes teste = new DadosInscricoes(selected);
+					teste.Teste(selected);
+					System.out.println("linha " + row + " coluna " + column + " " + selected);
+				}
+			}
+		);
+		
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
