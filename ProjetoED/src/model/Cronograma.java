@@ -10,6 +10,19 @@ public class Cronograma {
 	private Date dataResultado;
 	private Date dataMatricula;
 	private Date dataSegundaChamada;
+	
+	public Cronograma(Long id, Date dataInscricao, Date dataCurriculo, Date dataEntrevista, Date dataResultadoPre,
+			Date dataResultado, Date dataMatricula, Date dataSegundaChamada) {
+		super();
+		this.id = id;
+		this.dataInscricao = dataInscricao;
+		this.dataCurriculo = dataCurriculo;
+		this.dataEntrevista = dataEntrevista;
+		this.dataResultadoPre = dataResultadoPre;
+		this.dataResultado = dataResultado;
+		this.dataMatricula = dataMatricula;
+		this.dataSegundaChamada = dataSegundaChamada;
+	}
 
 	public Long getId() {
 		return id;
@@ -74,4 +87,14 @@ public class Cronograma {
 	public void setDataSegundaChamada(Date dataSegundaChamada) {
 		dataSegundaChamada = dataSegundaChamada;
 	}
+
+	@Override
+	public String toString() {
+		return "Cronograma [id=" + id + ", dataInscricao=" + dataInscricao + ", dataCurriculo=" + dataCurriculo
+				+ ", dataEntrevista=" + dataEntrevista + ", dataResultadoPre=" + dataResultadoPre + ", dataResultado="
+				+ dataResultado + ", dataMatricula=" + dataMatricula + ", dataSegundaChamada=" + dataSegundaChamada
+				+ "]";
+	}
+
+	
 }

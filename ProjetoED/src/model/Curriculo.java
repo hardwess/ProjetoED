@@ -1,5 +1,6 @@
 package model;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class Curriculo {
 	private Long id;
@@ -8,6 +9,21 @@ public class Curriculo {
 	private Long cPF;
 	private BufferedImage[] documentos;
 	
+	public Curriculo(Long id, Boolean genero, Integer idade, Long cPF) {
+		this.id = id;
+		this.genero = genero;
+		this.idade = idade;
+		this.cPF = cPF;
+	}
+
+	public Long getcPF() {
+		return cPF;
+	}
+
+	public void setcPF(Long cPF) {
+		this.cPF = cPF;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -47,4 +63,12 @@ public class Curriculo {
 	public void setDocumentos(BufferedImage[] documentos) {
 		this.documentos = documentos;
 	}
+
+	@Override
+	public String toString() {
+		return "Curriculo [id=" + id + ", genero=" + genero + ", idade=" + idade + ", cPF=" + cPF + ", documentos="
+				+ Arrays.toString(documentos) + "]";
+	}
+	
+	
 }

@@ -1,4 +1,3 @@
-idCurriculo;idInscricao;email
 1;1;montes@netusetmalesuada.edu
 2;2;luctus@convallisdolorQuisque.org
 3;3;nulla.vulputate@magnisdis.org

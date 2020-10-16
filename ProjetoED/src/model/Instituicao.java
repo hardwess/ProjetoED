@@ -8,7 +8,8 @@ public class Instituicao extends Usuario {
 	}
 
 	private Cronograma CadastraCronograma() {
-		Cronograma cronograma = new Cronograma();
-		return cronograma;
+//		Cronograma cronograma = new Cronograma();
+//		return cronograma;
+		return null;
 	}
 }

@@ -5,6 +5,13 @@ public class Candidato {
 	private Long idInscricao;
 	private String email;
 	
+	public Candidato(Long idCurriculo, Long idInscricao, String email) {
+		super();
+		this.idCurriculo = idCurriculo;
+		this.idInscricao = idInscricao;
+		this.email = email;
+	}
+
 	public Long getIdCurriculo() {
 		return idCurriculo;
 	}
@@ -35,5 +42,10 @@ public class Candidato {
 	
 	private void SolicitarRecurso() {
 		
+	}
+
+	@Override
+	public String toString() {
+		return "Candidato [idCurriculo=" + idCurriculo + ", idInscricao=" + idInscricao + ", email=" + email + "]";
 	}
 }

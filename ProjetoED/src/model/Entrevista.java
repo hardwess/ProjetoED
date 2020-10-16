@@ -5,6 +5,13 @@ public class Entrevista {
 	private Long id;
 	private Date dataEntrevista;
 	private Boolean statusEntrevista;
+	
+	public Entrevista(Long id, Date dataEntrevista, Boolean statusEntrevista) {
+		super();
+		this.id = id;
+		this.dataEntrevista = dataEntrevista;
+		this.statusEntrevista = statusEntrevista;
+	}
 
 	public Long getId() {
 		return id;
@@ -28,5 +35,11 @@ public class Entrevista {
 
 	public void setStatusEntrevista(Boolean statusEntrevista) {
 		this.statusEntrevista = statusEntrevista;
+	}
+
+	@Override
+	public String toString() {
+		return "Entrevista [id=" + id + ", dataEntrevista=" + dataEntrevista + ", statusEntrevista=" + statusEntrevista
+				+ "]";
 	}
 }
