@@ -1,9 +1,11 @@
 package controller.dataStructure.list;
 
+import model.Inscricao;
+
 public class Lista<T> {
 	private No<T> primeiroNo;
 	private No<T> ultimoNo;
-		private int tamanho;
+	private int tamanho;
 	
 	public Lista(){
 		this.primeiroNo = null;
@@ -134,7 +136,7 @@ public class Lista<T> {
 		}
 		remover(indice);
 	}
-
+	
 	@Override
 	public String toString() {
 		if(estaVazia()) {

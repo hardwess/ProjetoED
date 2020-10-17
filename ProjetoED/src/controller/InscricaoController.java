@@ -7,9 +7,9 @@ import controller.dataStructure.list.Lista;
 import model.Inscricao;
 
 public class InscricaoController {
+	Lista<Inscricao> lista = new Lista<Inscricao>();
 	public Lista<Inscricao> getListaInscricao() {
-		Lista<Inscricao> lista = new Lista<Inscricao>();
-		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\inscricao.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("D:\\Desenvolvimento\\ProjetoED\\ProjetoED\\src\\data\\inscricao.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] inscricao = line.split(";");
@@ -23,6 +23,18 @@ public class InscricaoController {
 			System.out.println("Erro");
 		}
 		return lista;
+	}
+	
+	public int retornaTamanho() {
+		return lista.tamanho();
+	}
+	
+	public boolean estaVazia() {
+		return lista.estaVazia();
+	}
+	
+	public Inscricao recuperar(int posicao) {
+		return lista.recuperar(posicao);
 	}
 	
 	public static void main(String[] args) {

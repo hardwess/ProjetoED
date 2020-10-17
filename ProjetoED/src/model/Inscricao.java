@@ -5,6 +5,8 @@ public class Inscricao {
 	private Boolean statusCurriculo;
 	private Long idCronograma;
 	
+	public Inscricao() {}
+	
 	public Inscricao(Long id, Entrevista entrevista, Boolean statusCurriculo, Long idCronograma) {
 		super();
 		this.id = id;

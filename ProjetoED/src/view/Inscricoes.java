@@ -18,6 +18,11 @@ import javax.swing.JScrollBar;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import controller.InscricaoController;
+import controller.dataStructure.list.Lista;
+import model.Inscricao;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -28,11 +33,8 @@ public class Inscricoes extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTable teste;
+	private Lista<Inscricao> lista = new Lista<Inscricao>();
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,9 +48,6 @@ public class Inscricoes extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Inscricoes() {
 		setTitle("Inscrições");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,41 +84,60 @@ public class Inscricoes extends JFrame {
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+				
+		criaJTable();
 		
+		scrollPane.setViewportView(table);
+		contentPane.setLayout(gl_contentPane);
+	}
+	
+	private void criaJTable() {
 		table = new JTable();
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{new Integer(1234), "teste@gmail.com", "bot\u00E3o", "Aprovar | Reprovar"},
-				{new Integer(1234), "teste@gmail.com", "bot\u00E3o", "Aprovar | Reprovar"},
-			},
-			new String[] {
-				"N\u00B0 curr\u00EDculo", "E-mail", "Documentos", "A\u00E7\u00F5es"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		
+		organizaJTable();
+		selecionaInscricao();
+	}
+	
+	private void selecionaInscricao() {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override public void valueChanged(ListSelectionEvent evt) {
 				if (evt.getValueIsAdjusting())
 					return; int row = table.getSelectedRow();
 					int column = table.getSelectedColumn();
 					Object selected = table.getModel().getValueAt(row, column);
-					DadosInscricoes teste = new DadosInscricoes(selected);
-					teste.Teste(selected);
-					System.out.println("linha " + row + " coluna " + column + " " + selected);
+					DadosInscricoes frameDadosInscricoes = new DadosInscricoes(selected);
+					frameDadosInscricoes.Teste(selected);
 				}
 			}
 		);
+	}
+	
+	private void organizaJTable() {
+		Inscricao dados;
+		DefaultTableModel modelo = new DefaultTableModel();
+		InscricaoController inscricaoController = new InscricaoController();
 		
-		scrollPane.setViewportView(table);
-		contentPane.setLayout(gl_contentPane);
+		inscricaoController.getListaInscricao();
+		
+		modelo.addColumn("Id");
+		modelo.addColumn("Entrevista");
+		modelo.addColumn("Currículo");
+		modelo.addColumn("Cronograma");
+		if (inscricaoController.estaVazia()) {
+			modelo.addRow(new String[] {"Sem informações", "Sem informações"});
+		} else {
+			for (int i = 0; i < inscricaoController.retornaTamanho(); i++) {
+				dados = inscricaoController.recuperar(i);
+				modelo.addRow(new String[] {
+						dados.getId().toString(),
+						dados.getId().toString(),
+						dados.getStatusCurriculo().toString(),
+						dados.getIdCronograma().toString()
+				});
+			}
+		}
+		
+		table.setModel(modelo);
 	}
 }
