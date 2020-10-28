@@ -13,10 +13,9 @@ public class InscricaoController {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] inscricao = line.split(";");
-		        lista.inserir(new Inscricao(Long.parseLong(inscricao[0]),//id
-		        										null, //entrevista
-		        										inscricao[2].equals("0")? false : true, //statusCurriculo
-		        										Long.parseLong(inscricao[3]))); //idCronograma
+		        Inscricao data = new Inscricao(Long.parseLong(inscricao[0]), inscricao[2], inscricao[1], null, inscricao[4].equals("0")? false : true,
+		        		inscricao[5].equals("0")? false : true);
+		        lista.inserir(data);
 		    }
 		    br.close();
 		} catch (Exception e) {
@@ -35,6 +34,10 @@ public class InscricaoController {
 	
 	public Inscricao recuperar(int posicao) {
 		return lista.recuperar(posicao);
+	}
+	
+	public boolean contem(Inscricao valor) {
+		return lista.contem(valor);
 	}
 	
 	public static void main(String[] args) {

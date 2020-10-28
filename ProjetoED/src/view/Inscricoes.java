@@ -19,8 +19,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import controller.CandidatoController;
 import controller.InscricaoController;
 import controller.dataStructure.list.Lista;
+import model.Candidato;
 import model.Inscricao;
 
 import javax.swing.GroupLayout;
@@ -49,6 +51,7 @@ public class Inscricoes extends JFrame {
 	}
 
 	public Inscricoes() {
+		this.setExtendedState(MAXIMIZED_BOTH);
 		setTitle("Inscrições");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 687, 480);
@@ -105,35 +108,62 @@ public class Inscricoes extends JFrame {
 				if (evt.getValueIsAdjusting())
 					return; int row = table.getSelectedRow();
 					int column = table.getSelectedColumn();
-					Object selected = table.getModel().getValueAt(row, column);
-					DadosInscricoes frameDadosInscricoes = new DadosInscricoes(selected);
-					frameDadosInscricoes.Teste(selected);
+					Object id = table.getModel().getValueAt(row, 0);
+					Object nome = table.getModel().getValueAt(row, 1);
+					Object cpf = table.getModel().getValueAt(row, 2);
+					Object rg = table.getModel().getValueAt(row, 3);
+					Object semestreAno = table.getModel().getValueAt(row, 4);
+					Object curso = table.getModel().getValueAt(row, 5);
+					Object entrevista = table.getModel().getValueAt(row, 6);
+					Object statusCurriculo = table.getModel().getValueAt(row, 7);
+					Object statusInscricao = table.getModel().getValueAt(row, 8);
+					Object deficiencia = table.getModel().getValueAt(row, 9);
+					DadosInscricoes frameDadosInscricoes = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+							statusCurriculo, statusInscricao);
+					frameDadosInscricoes.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+							statusCurriculo, statusInscricao);
 				}
 			}
 		);
 	}
 	
 	private void organizaJTable() {
+		Candidato candidato;
 		Inscricao dados;
 		DefaultTableModel modelo = new DefaultTableModel();
+		CandidatoController candidatoController = new CandidatoController();
 		InscricaoController inscricaoController = new InscricaoController();
 		
+		candidatoController.getListaCandidato();
 		inscricaoController.getListaInscricao();
 		
-		modelo.addColumn("Id");
+		modelo.addColumn("Id do candidato");
+		modelo.addColumn("Nome");
+		modelo.addColumn("CPF");
+		modelo.addColumn("RG");
+		modelo.addColumn("Semestre/Ano");
+		modelo.addColumn("Curso");
 		modelo.addColumn("Entrevista");
-		modelo.addColumn("Currículo");
-		modelo.addColumn("Cronograma");
+		modelo.addColumn("Status Currículo");
+		modelo.addColumn("Status Inscrição");
+		modelo.addColumn("Deficiência");
 		if (inscricaoController.estaVazia()) {
 			modelo.addRow(new String[] {"Sem informações", "Sem informações"});
 		} else {
 			for (int i = 0; i < inscricaoController.retornaTamanho(); i++) {
+				candidato = candidatoController.recuperar(i);
 				dados = inscricaoController.recuperar(i);
 				modelo.addRow(new String[] {
-						dados.getId().toString(),
-						dados.getId().toString(),
+						candidato.getIdCandidato().toString(),
+						candidato.getNome(),
+						candidato.getCpf(),
+						candidato.getRg(),
+						dados.getSemestreAno(),
+						dados.getCurso(),
+						null,
 						dados.getStatusCurriculo().toString(),
-						dados.getIdCronograma().toString()
+						dados.getStatusInscricao().toString(),
+						candidato.getDeficiencia(),
 				});
 			}
 		}

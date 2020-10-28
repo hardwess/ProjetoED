@@ -1,26 +1,41 @@
 package model;
+
+import java.util.Arrays;
+
 public class Inscricao {
-	private Long id;
+	private Long idCandidato;
+	private String semestreAno;
+	private String curso;
 	private Entrevista entrevista;
 	private Boolean statusCurriculo;
-	private Long idCronograma;
+	private Boolean statusInscricao;
 	
 	public Inscricao() {}
-	
-	public Inscricao(Long id, Entrevista entrevista, Boolean statusCurriculo, Long idCronograma) {
-		super();
-		this.id = id;
+
+	public Inscricao(Long idCandidato, String curso, String semestreAno, Entrevista entrevista, Boolean statusCurriculo,
+			Boolean statusInscricao) {
+		this.idCandidato = idCandidato;
+		this.semestreAno = semestreAno;
 		this.entrevista = entrevista;
 		this.statusCurriculo = statusCurriculo;
-		this.idCronograma = idCronograma;
+		this.statusInscricao = statusInscricao;
+		this.curso = curso;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getIdCandidato() {
+		return idCandidato;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdCandidato(Long idCandidato) {
+		this.idCandidato = idCandidato;
+	}
+
+	public String getSemestreAno() {
+		return semestreAno;
+	}
+
+	public void setSemestreAno(String semestreAno) {
+		this.semestreAno = semestreAno;
 	}
 
 	public Entrevista getEntrevista() {
@@ -39,18 +54,26 @@ public class Inscricao {
 		this.statusCurriculo = statusCurriculo;
 	}
 
-	public Long getIdCronograma() {
-		return idCronograma;
+	public Boolean getStatusInscricao() {
+		return statusInscricao;
 	}
 
-	public void setIdCronograma(Long idCronograma) {
-		this.idCronograma = idCronograma;
+	public void setStatusInscricao(Boolean statusInscricao) {
+		this.statusInscricao = statusInscricao;
+	}
+
+	public String getCurso() {
+		return curso;
+	}
+
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 
 	@Override
 	public String toString() {
-		return "Inscricao [id=" + id + ", entrevista=" + entrevista + ", statusCurriculo=" + statusCurriculo
-				+ ", idCronograma=" + idCronograma + "]";
+		return "Inscricao [idCandidato=" + idCandidato + ", semestreAno=" + semestreAno + ", entrevista=" + entrevista
+				+ ", statusCurriculo=" + statusCurriculo + ", statusInscricao=" + statusInscricao + ", curso="
+				+ curso + "]";
 	}
-	
 }
