@@ -1,11 +1,17 @@
 package controller.dataStructure.list;
 
+import javax.swing.JOptionPane;
+
+import model.Candidato;
 import model.Inscricao;
 
 public class Lista<T> {
 	private No<T> primeiroNo;
 	private No<T> ultimoNo;
 	private int tamanho;
+	private Inscricao[] data;
+	private String resultSearch;
+	private int posicaoEncontrada;
 	
 	public Lista(){
 		this.primeiroNo = null;
@@ -38,7 +44,7 @@ public class Lista<T> {
 			this.ultimoNo.setProximo(novoNo);
 			this.ultimoNo = novoNo;
 		} else {
-			No<T> noAnterior = buscarNo(posicao -1 );
+			No<T> noAnterior = buscarNo(posicao -1);
 			No<T> noAtual = buscarNo(posicao);
 			No<T> novoNo = new No<>(valor);
 			noAnterior.setProximo(novoNo);
@@ -135,6 +141,78 @@ public class Lista<T> {
 			throw new IllegalArgumentException(String.format("valor inválido - " + valor.toString()));
 		}
 		remover(indice);
+	}
+	
+	public int buscaSequencial(Long id, int count, int n, boolean found) {
+		data = convertToVector();
+
+		if (data != null && found == false) {
+			if (!id.equals(data[count].getIdCandidato()) && count < n-1 && found == false) {
+				count += 1;
+				buscaSequencial(id, count, n, false);
+			} else if (id.equals(data[count].getIdCandidato())) {
+				found = true;
+				posicaoEncontrada = count + 1;
+				resultSearch = "A inscrição foi encontrada na posição: " + posicaoEncontrada + "\n";
+				return posicaoEncontrada;
+			} else if (found == false) {
+				resultSearch = "Inscrição não encontrada. Tente novamente.";
+				JOptionPane.showMessageDialog(null, resultSearch);
+			}
+		}
+		
+		return posicaoEncontrada;
+	}
+	
+	public Inscricao[] convertToVector() {
+		No auxl = primeiroNo;
+		int count = 0;
+		int size = tamanho();
+		Inscricao[] data = new Inscricao[size];
+		while (auxl != null) {
+			data[count] = (Inscricao) auxl.getValor();
+			auxl = auxl.getProximo();
+			count++;
+		}
+
+		return data;
+	}
+	
+	public void substituir(int pos, T valor) {
+		int count = 1;
+		
+		if (pos == 0) {
+			this.primeiroNo.setValor(valor);
+			System.out.println("VALOR 0 " + this.primeiroNo.getValor());
+		} else {
+			No<T> aux = primeiroNo.getProximo();
+			if (aux != null) {
+				while (count != pos) {
+					count++;
+					aux = aux.getProximo();
+					/**System.out.println("VALOR " + aux.getValor());**/
+				}
+				
+				if (count == pos) {
+					aux.setValor(valor);
+					/**System.out.println("VALOR 1 " + aux.getValor());**/
+				}
+			}
+		}
+	}
+	
+	public String montaTxt() {
+		if(estaVazia()) {
+			return "Sem informações";
+		} else {
+			No aux = primeiroNo;
+			String r = "";
+			while(aux!=null){
+				r=r+aux.getValor();
+				aux=aux.getProximo();
+			}
+			return r.toString();
+		}
 	}
 	
 	@Override

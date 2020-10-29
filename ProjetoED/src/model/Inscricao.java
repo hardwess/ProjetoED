@@ -72,8 +72,8 @@ public class Inscricao {
 
 	@Override
 	public String toString() {
-		return "Inscricao [idCandidato=" + idCandidato + ", semestreAno=" + semestreAno + ", entrevista=" + entrevista
-				+ ", statusCurriculo=" + statusCurriculo + ", statusInscricao=" + statusInscricao + ", curso="
-				+ curso + "]";
+		return idCandidato + ";" + semestreAno + ";" + entrevista
+				+ ";" + statusCurriculo + ";" + statusInscricao + ";"
+				+ curso + "\n";
 	}
 }

@@ -36,8 +36,16 @@ public class InscricaoController {
 		return lista.recuperar(posicao);
 	}
 	
-	public boolean contem(Inscricao valor) {
-		return lista.contem(valor);
+	public int contem(Long id, int row) {
+		return lista.buscaSequencial(id, 0, row+1, false);
+	}
+	
+	public void substituir(int pos, Inscricao e) {
+		this.lista.substituir(pos, e);
+	}
+	
+	public String montaTxt() {
+		return this.lista.montaTxt();
 	}
 	
 	public static void main(String[] args) {

@@ -119,9 +119,9 @@ public class Inscricoes extends JFrame {
 					Object statusInscricao = table.getModel().getValueAt(row, 8);
 					Object deficiencia = table.getModel().getValueAt(row, 9);
 					DadosInscricoes frameDadosInscricoes = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-							statusCurriculo, statusInscricao);
+							statusCurriculo, statusInscricao, row);
 					frameDadosInscricoes.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-							statusCurriculo, statusInscricao);
+							statusCurriculo, statusInscricao, row);
 				}
 			}
 		);

@@ -1,5 +1,7 @@
 package controller.dataStructure.list;
 
+import model.Inscricao;
+
 public class No<T> {
 	private T valor;
 	private No<T> proximo;
@@ -27,6 +29,5 @@ public class No<T> {
 
 	public String toString() {
 		return this.valor.toString();
-	}
-	
+	}	
 }

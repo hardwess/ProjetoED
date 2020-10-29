@@ -29,12 +29,12 @@ public class DadosInscricoes extends JFrame {
 	 * Launch the application.
 	 */
 	public static void ChamaDados(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
-			Object entrevista, Object statusCurriculo, Object statusInscricao) {
+			Object entrevista, Object statusCurriculo, Object statusInscricao, Object row) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					DadosInscricoes frame = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-							statusCurriculo, statusInscricao);
+							statusCurriculo, statusInscricao, row);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,12 +42,14 @@ public class DadosInscricoes extends JFrame {
 			}
 		});
 	}
+	
+	public DadosInscricoes() {}
 
 	/**
 	 * Create the frame.
 	 */
 	public DadosInscricoes(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
-			Object entrevista, Object statusCurriculo, Object statusInscricao) {
+			Object entrevista, Object statusCurriculo, Object statusInscricao, Object row) {
 		setTitle("Dados inscrição do candidato " + id.toString());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 712, 407);
@@ -104,17 +106,37 @@ public class DadosInscricoes extends JFrame {
 		contentPane.add(lblDeficienciaData);
 		
 		JButton btnReprovar = new JButton("Reprovar");
+		btnReprovar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				InscricaoController insc = new InscricaoController();
+				insc.getListaInscricao();
+				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				if (insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString())) > 0) {
+					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
+							semestreAno.toString(), curso.toString(),
+							null, Boolean.valueOf(statusCurriculo.toString()),
+							false);
+					insc.substituir(pos-1, novoValor);
+				}
+				System.out.println(insc.getListaInscricao());
+			}
+		});
 		btnReprovar.setBounds(492, 334, 89, 23);
 		contentPane.add(btnReprovar);
 		
 		JButton btnAprovar = new JButton("Aprovar");
 		btnAprovar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inscricao data = new Inscricao(Long.parseLong(id.toString()), curso.toString(), semestreAno.toString(), null,
-						Boolean.valueOf(statusCurriculo.toString()), Boolean.valueOf(statusInscricao.toString()));
 				InscricaoController insc = new InscricaoController();
 				insc.getListaInscricao();
-				System.out.println(insc.contem(data) + " " + data.toString());
+				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				if (pos > 0) {
+					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
+							semestreAno.toString(), curso.toString(),
+							null, Boolean.valueOf(statusCurriculo.toString()),
+							true);
+					insc.substituir(pos-1, novoValor);
+				}
 				System.out.println(insc.getListaInscricao());
 			}
 		});
