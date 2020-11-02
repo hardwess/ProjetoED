@@ -96,6 +96,13 @@ public class Menu extends JFrame {
 		contentPane.add(btnInscricoes);
 		
 		JButton btnSair = new JButton("SAIR");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login Login = new Login();
+				Login.setVisible(true);
+			}
+		});
+		
 		btnSair.setBackground(new Color(255, 160, 122));
 		btnSair.setBounds(25, 275, 512, 45);
 		contentPane.add(btnSair);

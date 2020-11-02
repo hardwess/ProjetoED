@@ -54,8 +54,14 @@ public class Inscricao {
 		this.statusCurriculo = statusCurriculo;
 	}
 
-	public Boolean getStatusInscricao() {
-		return statusInscricao;
+	public String getStatusInscricao() {
+		String Status;
+		if (this.statusInscricao == true){
+			Status = "Aprovado";
+		} else {
+			Status = "Reprovado";
+		}
+		return Status;
 	}
 
 	public void setStatusInscricao(Boolean statusInscricao) {
