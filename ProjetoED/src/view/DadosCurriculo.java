@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
-public class DadosInscricoes extends JFrame {
+public class DadosCurriculo extends JFrame {
 
 	private JPanel contentPane;
 	private Lista<Inscricao> lista;
@@ -33,7 +33,7 @@ public class DadosInscricoes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DadosInscricoes frame = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+					DadosCurriculo frame = new DadosCurriculo(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
 							statusCurriculo, statusInscricao, row);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -43,14 +43,14 @@ public class DadosInscricoes extends JFrame {
 		});
 	}
 	
-	public DadosInscricoes() {}
+	public DadosCurriculo() {}
 
 	/**
 	 * Create the frame.
 	 */
-	public DadosInscricoes(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
+	public DadosCurriculo(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
 			Object entrevista, Object statusCurriculo, Object statusInscricao, Object row) {
-		setTitle("Dados inscrição do candidato " + id.toString());
+		setTitle("Dados do candidato " + id.toString());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 712, 407);
 		contentPane = new JPanel();
@@ -114,8 +114,8 @@ public class DadosInscricoes extends JFrame {
 				if (insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString())) > 0) {
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
 							semestreAno.toString(), curso.toString(),
-							null, Boolean.valueOf(statusCurriculo.toString()),
-							false);
+							null, true,
+							Boolean.valueOf(statusInscricao.toString()));
 					insc.substituir(pos-1, novoValor);
 				}
 				System.out.println(insc.getListaInscricao());
@@ -133,8 +133,8 @@ public class DadosInscricoes extends JFrame {
 				if (pos > 0) {
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
 							semestreAno.toString(), curso.toString(),
-							null, Boolean.valueOf(statusCurriculo.toString()),
-							true);
+							null, true,
+							Boolean.valueOf(statusInscricao.toString()));
 					insc.substituir(pos-1, novoValor);
 				}
 				System.out.println(insc.getListaInscricao());

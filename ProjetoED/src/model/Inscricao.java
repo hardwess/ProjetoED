@@ -46,8 +46,8 @@ public class Inscricao {
 		this.entrevista = entrevista;
 	}
 
-	public Boolean getStatusCurriculo() {
-		return statusCurriculo;
+	public String getStatusCurriculo() {
+		return statusCurriculo? "Aprovado" : "Reprovado";
 	}
 
 	public void setStatusCurriculo(Boolean statusCurriculo) {
@@ -55,13 +55,7 @@ public class Inscricao {
 	}
 
 	public String getStatusInscricao() {
-		String Status;
-		if (this.statusInscricao == true){
-			Status = "Aprovado";
-		} else {
-			Status = "Reprovado";
-		}
-		return Status;
+		return statusInscricao? "Aprovado" : "Reprovado";
 	}
 
 	public void setStatusInscricao(Boolean statusInscricao) {
@@ -79,7 +73,7 @@ public class Inscricao {
 	@Override
 	public String toString() {
 		return idCandidato + ";" + semestreAno + ";" + entrevista
-				+ ";" + statusCurriculo + ";" + statusInscricao + ";"
+				+ ";" + (statusCurriculo? "1" : "0") + ";" + statusInscricao + ";"
 				+ curso + "\n";
 	}
 }

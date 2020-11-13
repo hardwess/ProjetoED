@@ -90,10 +90,10 @@ public class Cronograma {
 
 	@Override
 	public String toString() {
-		return "Cronograma [id=" + id + ", dataInscricao=" + dataInscricao + ", dataCurriculo=" + dataCurriculo
-				+ ", dataEntrevista=" + dataEntrevista + ", dataResultadoPre=" + dataResultadoPre + ", dataResultado="
-				+ dataResultado + ", dataMatricula=" + dataMatricula + ", dataSegundaChamada=" + dataSegundaChamada
-				+ "]";
+		return id + ";" + dataInscricao + ";" + dataCurriculo
+				+ ";" + dataEntrevista + ";" + dataResultadoPre + ";"
+				+ dataResultado + ";" + dataMatricula + ";" + dataSegundaChamada
+				+ "\n";
 	}
 
 	

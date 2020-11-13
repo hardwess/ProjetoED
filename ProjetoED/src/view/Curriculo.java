@@ -12,10 +12,17 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import controller.CandidatoController;
+import controller.InscricaoController;
+import model.Candidato;
+import model.Inscricao;
 
 public class Curriculo extends JFrame {
 
@@ -43,7 +50,7 @@ public class Curriculo extends JFrame {
 	 */
 	public Curriculo() {		
 		setTitle("Curr\u00EDculos");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 687, 480);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 235, 205));
@@ -78,15 +85,89 @@ public class Curriculo extends JFrame {
 					.addContainerGap())
 		);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Id", "G\u00EAnero", "Idade", "CPF"
-			}
-		));
+		criaJTable();
+		
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	
+	private void criaJTable() {
+		table = new JTable();
+		table.setColumnSelectionAllowed(true);
+		table.setCellSelectionEnabled(true);
+		organizaJTable();
+		selecionaCurriculo();
+	}
+	
+	private void selecionaCurriculo() {
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override public void valueChanged(ListSelectionEvent evt) {
+				if (evt.getValueIsAdjusting())
+					return; int row = table.getSelectedRow();
+					int column = table.getSelectedColumn();
+					Object id = table.getModel().getValueAt(row, 0);
+					Object nome = table.getModel().getValueAt(row, 1);
+					Object cpf = table.getModel().getValueAt(row, 2);
+					Object rg = table.getModel().getValueAt(row, 3);
+					Object semestreAno = table.getModel().getValueAt(row, 4);
+					Object curso = table.getModel().getValueAt(row, 5);
+					Object entrevista = table.getModel().getValueAt(row, 6);
+					Object statusCurriculo = table.getModel().getValueAt(row, 7);
+					Object statusInscricao = table.getModel().getValueAt(row, 8);
+					Object deficiencia = table.getModel().getValueAt(row, 9);
+					DadosCurriculo frameDadosCurriculo = new DadosCurriculo(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+							statusCurriculo, statusInscricao, row);
+					frameDadosCurriculo.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+							statusCurriculo, statusInscricao, row);
+				}
+			}
+		);
+	}
+	
+	
+	private void organizaJTable() {
+		Candidato candidato;
+		Inscricao dados;
+		DefaultTableModel modelo = new DefaultTableModel();
+		CandidatoController candidatoController = new CandidatoController();
+		InscricaoController inscricaoController = new InscricaoController();
+		
+		candidatoController.getListaCandidato();
+		inscricaoController.getListaInscricao();
+		
+		modelo.addColumn("Id do candidato");
+		modelo.addColumn("Nome");
+		modelo.addColumn("CPF");
+		modelo.addColumn("RG");
+		modelo.addColumn("Semestre/Ano");
+		modelo.addColumn("Curso");
+		modelo.addColumn("Entrevista");
+		modelo.addColumn("Status Currículo");
+		modelo.addColumn("Status Inscrição");
+		modelo.addColumn("Deficiência");
+		if (inscricaoController.estaVazia()) {
+			modelo.addRow(new String[] {"Sem informações", "Sem informações"});
+		} else {
+			for (int i = 0; i < inscricaoController.retornaTamanho(); i++) {
+				candidato = candidatoController.recuperar(i);
+				dados = inscricaoController.recuperar(i);
+				modelo.addRow(new String[] {
+						candidato.getIdCandidato().toString(),
+						candidato.getNome(),
+						candidato.getCpf(),
+						candidato.getRg(),
+						dados.getSemestreAno(),
+						dados.getCurso(),
+						null,
+						dados.getStatusCurriculo().toString(),
+						dados.getStatusInscricao().toString(),
+						candidato.getDeficiencia(),
+						//Mostrar documentos
+				});
+			}
+		}
+		
+		table.setModel(modelo);
 	}
 }

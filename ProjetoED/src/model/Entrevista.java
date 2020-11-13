@@ -39,7 +39,7 @@ public class Entrevista {
 
 	@Override
 	public String toString() {
-		return "Entrevista [id=" + id + ", dataEntrevista=" + dataEntrevista + ", statusEntrevista=" + statusEntrevista
-				+ "]";
+		return id + ";" + dataEntrevista + ";" + (statusEntrevista? "1": "0")
+				+ "\n";
 	}
 }

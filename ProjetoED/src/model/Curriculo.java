@@ -66,8 +66,7 @@ public class Curriculo {
 
 	@Override
 	public String toString() {
-		return "Curriculo [id=" + id + ", genero=" + genero + ", idade=" + idade + ", cPF=" + cPF + ", documentos="
-				+ Arrays.toString(documentos) + "]";
+		return id + ";" + (genero? "1" : "0") + ";" + idade + ";" + cPF+"\n";
 	}
 	
 	

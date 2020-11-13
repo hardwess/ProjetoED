@@ -88,7 +88,7 @@ public class Candidato {
 
 	@Override
 	public String toString() {
-		return "Candidato [idCurriculo=" + idCurriculo + ", idInscricao=" + idInscricao + ", nome=" + nome + ", cpf="
-				+ cpf + ", rg=" + rg + ", deficiencia=" + deficiencia + ", email=" + email + "]";
+		return idCurriculo + ";" + idInscricao + ";" + nome + ";"
+				+ cpf + ";" + rg + ";" + deficiencia + ";" + email + "\n";
 	}
 }
