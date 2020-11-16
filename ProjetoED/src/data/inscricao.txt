@@ -1,10 +1,10 @@
-1;2/2020;Analise e Desenvolvimento de Sistemas;1;0;0;96981415020;231412708
-2;2/2020;Ciencia da Computacao;2;0;0;57551468021;352686716
-3;2/2020;Ciência da Computação;3;0;0;96499950050;141929339
-4;2/2020;Ciência da Computação;4;0;0;88247091097;214063318
-5;2/2020;Análise e Desenvolvimento de Sistemas;5;0;0;61321283016;171144855
-6;2/2020;Análise e Desenvolvimento de Sistemas;6;0;0;27828792000;422866568
-7;2/2020;Ciência da Computação;7;0;0;94232195009;371994007
-8;2/2020;Análise e Desenvolvimento de Sistemas;8;0;0;50072966009;373872422
-9;2/2020;Ciência da Computação;9;0;0;62473256063;501926264
-10;2/2020;Análise e Desenvolvimento de Sistemas;10;0;0;78146009018;238522878
+1;2/2020;Analise e Desenvolvimento de Sistemas;null;2;0
+2;2/2020;Ciencia da Computacao;null;2;2
+3;2/2020;Ciencia da Computacao;null;2;2
+4;2/2020;Ciencia da Computacao;null;2;2
+5;2/2020;Analise e Desenvolvimento de Sistemas;null;2;2
+6;2/2020;Analise e Desenvolvimento de Sistemas;null;2;2
+7;2/2020;Ciencia da Computacao;null;2;2
+8;2/2020;Analise e Desenvolvimento de Sistemas;null;2;2
+9;2/2020;Ciencia da Computacao;null;2;2
+10;2/2020;Analise e Desenvolvimento de Sistemas;null;2;2

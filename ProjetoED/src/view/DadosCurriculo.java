@@ -114,8 +114,8 @@ public class DadosCurriculo extends JFrame {
 				if (insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString())) > 0) {
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
 							semestreAno.toString(), curso.toString(),
-							null, true,
-							Boolean.valueOf(statusInscricao.toString()));
+							null, 0,
+							Integer.parseInt(statusInscricao.toString()));
 					insc.substituir(pos-1, novoValor);
 				}
 				System.out.println(insc.getListaInscricao());
@@ -133,8 +133,8 @@ public class DadosCurriculo extends JFrame {
 				if (pos > 0) {
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
 							semestreAno.toString(), curso.toString(),
-							null, true,
-							Boolean.valueOf(statusInscricao.toString()));
+							null, 1,
+							Integer.parseInt(statusInscricao.toString()));
 					insc.substituir(pos-1, novoValor);
 				}
 				System.out.println(insc.getListaInscricao());

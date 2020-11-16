@@ -94,10 +94,10 @@ public class Inscricoes extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	private void criaJTable() {
+	public void criaJTable() {
 		table = new JTable();
-		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
+		table.setColumnSelectionAllowed(true);
 		organizaJTable();
 		selecionaInscricao();
 	}
@@ -122,6 +122,7 @@ public class Inscricoes extends JFrame {
 							statusCurriculo, statusInscricao, row);
 					frameDadosInscricoes.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
 							statusCurriculo, statusInscricao, row);
+					dispose();
 				}
 			}
 		);
@@ -161,8 +162,8 @@ public class Inscricoes extends JFrame {
 						dados.getSemestreAno(),
 						dados.getCurso(),
 						null,
-						dados.getStatusCurriculo().toString(),
-						dados.getStatusInscricao().toString(),
+						dados.getStatusCurriculo(),
+						dados.getStatusInscricao(),
 						candidato.getDeficiencia(),
 				});
 			}

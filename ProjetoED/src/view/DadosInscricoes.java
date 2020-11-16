@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,11 +12,11 @@ import model.Inscricao;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class DadosInscricoes extends JFrame {
@@ -113,12 +112,16 @@ public class DadosInscricoes extends JFrame {
 				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
 				if (insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString())) > 0) {
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
-							semestreAno.toString(), curso.toString(),
-							null, Boolean.valueOf(statusCurriculo.toString()),
-							false);
+							curso.toString(), semestreAno.toString(),
+							null, returnStatusCurriculo(statusCurriculo.toString()),
+							0);
 					insc.substituir(pos-1, novoValor);
 				}
-				System.out.println(insc.getListaInscricao());
+				insc.saveListInscricao(insc.montaTxt());
+				dispose();
+				Inscricoes view = new Inscricoes();
+				view.dispose();
+				view.setVisible(true);
 			}
 		});
 		btnReprovar.setBounds(492, 334, 89, 23);
@@ -127,20 +130,41 @@ public class DadosInscricoes extends JFrame {
 		JButton btnAprovar = new JButton("Aprovar");
 		btnAprovar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InscricaoController insc = new InscricaoController();
-				insc.getListaInscricao();
-				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
-				if (pos > 0) {
-					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
-							semestreAno.toString(), curso.toString(),
-							null, Boolean.valueOf(statusCurriculo.toString()),
-							true);
-					insc.substituir(pos-1, novoValor);
+				if (statusInscricao.toString() == "Aprovado") {
+					JOptionPane.showMessageDialog(null, "Essa inscrição já foi aprovada.");
+				} else {
+					InscricaoController insc = new InscricaoController();
+					insc.getListaInscricao();
+					int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+					if (pos > 0) {
+						Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
+								curso.toString(), semestreAno.toString(),
+								null, returnStatusCurriculo(statusCurriculo.toString()),
+								1);
+						insc.substituir(pos-1, novoValor);
+					}
+					insc.saveListInscricao(insc.montaTxt());
+					dispose();
+					Inscricoes view = new Inscricoes();
+					view.dispose();
+					view.setVisible(true);
 				}
-				System.out.println(insc.getListaInscricao());
 			}
 		});
 		btnAprovar.setBounds(597, 334, 89, 23);
 		contentPane.add(btnAprovar);
+	}
+	
+	public int returnStatusCurriculo(String status) {
+		int newStatus = 0;
+		if (status == "Pendente") {
+			newStatus = 2;
+		} else if (status == "Aprovado") {
+			newStatus = 1;
+		} else if (status == "Reprovado") {
+			newStatus = 0;
+		}
+		
+		return newStatus;
 	}
 }

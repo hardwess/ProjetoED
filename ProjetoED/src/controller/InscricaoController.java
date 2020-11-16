@@ -13,7 +13,7 @@ import model.Candidato;
 import model.Inscricao;
 
 public class InscricaoController {
-	final Path path = Paths.get("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\inscricao.txt");
+	final Path path = Paths.get("D:\\Desenvolvimento\\ProjetoED\\ProjetoED\\src\\data\\inscricao.txt");
 	Lista<Inscricao> lista = new Lista<Inscricao>();
 	
 	public Lista<Inscricao> getListaInscricao() {
@@ -21,8 +21,8 @@ public class InscricaoController {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] inscricao = line.split(";");
-		        Inscricao data = new Inscricao(Long.parseLong(inscricao[0]), inscricao[2], inscricao[1], null, inscricao[4].equals("0")? false : true,
-		        		inscricao[5].equals("0")? false : true);
+		        Inscricao data = new Inscricao(Long.parseLong(inscricao[0]), inscricao[2], inscricao[1], null, Integer.parseInt(inscricao[4]),
+		        		Integer.parseInt(inscricao[5]));
 		        lista.inserir(data);
 		    }
 		    br.close();
@@ -32,13 +32,13 @@ public class InscricaoController {
 		return lista;
 	}
 	
-	public void saveListInscricao(Lista<Inscricao> lista) {
+	public void saveListInscricao(String lista) {
 		try {
 			BufferedWriter bw = null;
 			File file = new File(path.toString());
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
-			bw.write(lista.montaTxt());
+			bw.write(lista);
 			bw.close();
 			
 		} catch(Exception e) {

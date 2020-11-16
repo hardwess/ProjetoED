@@ -7,13 +7,13 @@ public class Inscricao {
 	private String semestreAno;
 	private String curso;
 	private Entrevista entrevista;
-	private Boolean statusCurriculo;
-	private Boolean statusInscricao;
+	private int statusCurriculo;
+	private int statusInscricao;
 	
 	public Inscricao() {}
 
-	public Inscricao(Long idCandidato, String curso, String semestreAno, Entrevista entrevista, Boolean statusCurriculo,
-			Boolean statusInscricao) {
+	public Inscricao(Long idCandidato, String curso, String semestreAno, Entrevista entrevista, int statusCurriculo,
+			int statusInscricao) {
 		this.idCandidato = idCandidato;
 		this.semestreAno = semestreAno;
 		this.entrevista = entrevista;
@@ -47,18 +47,36 @@ public class Inscricao {
 	}
 
 	public String getStatusCurriculo() {
-		return statusCurriculo? "Aprovado" : "Reprovado";
+		String status = "";
+		if (this.statusCurriculo == 0) {
+			status = "Reprovado";
+		} else if (this.statusCurriculo == 1) {
+			status = "Aprovado";
+		} else if (this.statusCurriculo == 2) {
+			status = "Pendente";
+		}
+		
+		return status;
 	}
 
-	public void setStatusCurriculo(Boolean statusCurriculo) {
+	public void setStatusCurriculo(int statusCurriculo) {
 		this.statusCurriculo = statusCurriculo;
 	}
 
 	public String getStatusInscricao() {
-		return statusInscricao? "Aprovado" : "Reprovado";
+		String status = "";
+		if (this.statusInscricao == 0) {
+			status = "Reprovado";
+		} else if (this.statusInscricao == 1) {
+			status = "Aprovado";
+		} else if (this.statusInscricao == 2) {
+			status = "Pendente";
+		}
+		
+		return status;
 	}
 
-	public void setStatusInscricao(Boolean statusInscricao) {
+	public void setStatusInscricao(int statusInscricao) {
 		this.statusInscricao = statusInscricao;
 	}
 
@@ -72,8 +90,8 @@ public class Inscricao {
 
 	@Override
 	public String toString() {
-		return idCandidato + ";" + semestreAno + ";" + entrevista
-				+ ";" + (statusCurriculo? "1" : "0") + ";" + statusInscricao + ";"
-				+ curso + "\n";
+		return idCandidato + ";" + semestreAno + ";" + curso
+				+ ";" + entrevista + ";" + statusCurriculo + ";"
+				+ statusInscricao + "\n";
 	}
 }
