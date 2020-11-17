@@ -9,17 +9,19 @@ public class Inscricao {
 	private Entrevista entrevista;
 	private int statusCurriculo;
 	private int statusInscricao;
+	private String turno;
 	
 	public Inscricao() {}
 
 	public Inscricao(Long idCandidato, String curso, String semestreAno, Entrevista entrevista, int statusCurriculo,
-			int statusInscricao) {
+			int statusInscricao, String turno) {
 		this.idCandidato = idCandidato;
 		this.semestreAno = semestreAno;
 		this.entrevista = entrevista;
 		this.statusCurriculo = statusCurriculo;
 		this.statusInscricao = statusInscricao;
 		this.curso = curso;
+		this.turno = turno;
 	}
 
 	public Long getIdCandidato() {
@@ -88,10 +90,18 @@ public class Inscricao {
 		this.curso = curso;
 	}
 
+	public String getTurno() {
+		return turno;
+	}
+
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+
 	@Override
 	public String toString() {
 		return idCandidato + ";" + semestreAno + ";" + curso
 				+ ";" + entrevista + ";" + statusCurriculo + ";"
-				+ statusInscricao + "\n";
+				+ statusInscricao + ";" + turno + "\n";
 	}
 }

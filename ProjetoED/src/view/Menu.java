@@ -57,7 +57,7 @@ public class Menu extends JFrame {
 		JButton btnCurriculos = new JButton("CURR\u00CDCULOS");
 		btnCurriculos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Curriculo curriculo = new Curriculo();
+				Curriculos curriculo = new Curriculos();
 				curriculo.setVisible(true);
 			}
 		});

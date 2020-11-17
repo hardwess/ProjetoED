@@ -9,6 +9,7 @@ import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -114,15 +115,20 @@ public class Inscricoes extends JFrame {
 					Object rg = table.getModel().getValueAt(row, 3);
 					Object semestreAno = table.getModel().getValueAt(row, 4);
 					Object curso = table.getModel().getValueAt(row, 5);
-					Object entrevista = table.getModel().getValueAt(row, 6);
-					Object statusCurriculo = table.getModel().getValueAt(row, 7);
-					Object statusInscricao = table.getModel().getValueAt(row, 8);
-					Object deficiencia = table.getModel().getValueAt(row, 9);
-					DadosInscricoes frameDadosInscricoes = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-							statusCurriculo, statusInscricao, row);
-					frameDadosInscricoes.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-							statusCurriculo, statusInscricao, row);
-					dispose();
+					Object turno = table.getModel().getValueAt(row, 6);
+					Object entrevista = table.getModel().getValueAt(row, 7);
+					Object statusCurriculo = table.getModel().getValueAt(row, 8);
+					Object statusInscricao = table.getModel().getValueAt(row, 9);
+					Object deficiencia = table.getModel().getValueAt(row, 10);
+					if (statusInscricao == "Pendente") {
+						DadosInscricoes frameDadosInscricoes = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+								statusCurriculo, statusInscricao, turno, row);
+						frameDadosInscricoes.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+								statusCurriculo, statusInscricao, turno, row);
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Essa inscrição já foi avaliada. Tente outra.");
+					}
 				}
 			}
 		);
@@ -144,6 +150,7 @@ public class Inscricoes extends JFrame {
 		modelo.addColumn("RG");
 		modelo.addColumn("Semestre/Ano");
 		modelo.addColumn("Curso");
+		modelo.addColumn("Turno");
 		modelo.addColumn("Entrevista");
 		modelo.addColumn("Status Currículo");
 		modelo.addColumn("Status Inscrição");
@@ -161,6 +168,7 @@ public class Inscricoes extends JFrame {
 						candidato.getRg(),
 						dados.getSemestreAno(),
 						dados.getCurso(),
+						dados.getTurno(),
 						null,
 						dados.getStatusCurriculo(),
 						dados.getStatusInscricao(),

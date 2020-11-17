@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class DadosCurriculo extends JFrame {
 
@@ -28,13 +29,13 @@ public class DadosCurriculo extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void ChamaDados(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
-			Object entrevista, Object statusCurriculo, Object statusInscricao, Object row) {
+	public static void ChamaDados(Object id, Object cpf, Object rg, Object deficiencia, Object nome, Object genero,
+			Object idade, Object statusCurriculo, Object statusInscricao, Object email, Object row) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DadosCurriculo frame = new DadosCurriculo(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-							statusCurriculo, statusInscricao, row);
+					DadosCurriculo frame = new DadosCurriculo(id, cpf, rg, deficiencia, nome, genero, idade,
+							statusCurriculo, statusInscricao, email, row);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,8 +49,8 @@ public class DadosCurriculo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DadosCurriculo(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
-			Object entrevista, Object statusCurriculo, Object statusInscricao, Object row) {
+	public DadosCurriculo(Object id, Object cpf, Object rg, Object deficiencia, Object nome, Object genero,
+			Object idade, Object statusCurriculo, Object statusInscricao, Object email, Object row) {
 		setTitle("Dados do candidato " + id.toString());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 712, 407);
@@ -59,10 +60,10 @@ public class DadosCurriculo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCandidato = new JLabel("Candidato " + id.toString());
+		JLabel lblCandidato = new JLabel("Currículo Candidato " + id.toString());
 		lblCandidato.setForeground(new Color(255, 160, 122));
 		lblCandidato.setFont(new Font("Arial", Font.BOLD, 26));
-		lblCandidato.setBounds(248, 11, 221, 59);
+		lblCandidato.setBounds(171, 11, 417, 59);
 		contentPane.add(lblCandidato);
 		
 		JLabel lblNome = new JLabel("Nome:");
@@ -89,36 +90,25 @@ public class DadosCurriculo extends JFrame {
 		lblRgData.setBounds(66, 145, 221, 14);
 		contentPane.add(lblRgData);
 		
-		JLabel lblCurso = new JLabel("Curso:");
-		lblCurso.setBounds(307, 109, 46, 14);
-		contentPane.add(lblCurso);
-		
-		JLabel lblCursoData = new JLabel(curso.toString());
-		lblCursoData.setBounds(369, 109, 317, 14);
-		contentPane.add(lblCursoData);
-		
-		JLabel lblPossuiDeficincia = new JLabel("Possui defici\u00EAncia:");
-		lblPossuiDeficincia.setBounds(10, 182, 110, 14);
-		contentPane.add(lblPossuiDeficincia);
-		
-		JLabel lblDeficienciaData = new JLabel(deficiencia.toString());
-		lblDeficienciaData.setBounds(130, 182, 93, 14);
-		contentPane.add(lblDeficienciaData);
-		
 		JButton btnReprovar = new JButton("Reprovar");
 		btnReprovar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InscricaoController insc = new InscricaoController();
 				insc.getListaInscricao();
 				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
-				if (insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString())) > 0) {
+				if (pos > 0) {
+					Inscricao dado = insc.recuperar(pos-1);
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
-							semestreAno.toString(), curso.toString(),
-							null, 0,
-							Integer.parseInt(statusInscricao.toString()));
+								dado.getCurso(), dado.getSemestreAno(),
+								null, 0,
+								returnStatusInscricao(statusInscricao.toString()), dado.getTurno());
 					insc.substituir(pos-1, novoValor);
 				}
-				System.out.println(insc.getListaInscricao());
+				insc.saveListInscricao(insc.montaTxt());
+				dispose();
+				Curriculos view = new Curriculos();
+				view.dispose();
+				view.setVisible(true);
 			}
 		});
 		btnReprovar.setBounds(492, 334, 89, 23);
@@ -131,16 +121,50 @@ public class DadosCurriculo extends JFrame {
 				insc.getListaInscricao();
 				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
 				if (pos > 0) {
+					Inscricao dado = insc.recuperar(pos-1);
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
-							semestreAno.toString(), curso.toString(),
-							null, 1,
-							Integer.parseInt(statusInscricao.toString()));
+								dado.getCurso(), dado.getSemestreAno(),
+								null, 1,
+								returnStatusInscricao(statusInscricao.toString()), dado.getTurno());
 					insc.substituir(pos-1, novoValor);
 				}
-				System.out.println(insc.getListaInscricao());
+				insc.saveListInscricao(insc.montaTxt());
+				dispose();
+				Curriculos view = new Curriculos();
+				view.dispose();
+				view.setVisible(true);
 			}
 		});
 		btnAprovar.setBounds(597, 334, 89, 23);
 		contentPane.add(btnAprovar);
+		
+		JLabel lblStatusInscrio = DefaultComponentFactory.getInstance().createLabel("Status Inscri\u00E7\u00E3o:");
+		lblStatusInscrio.setBounds(307, 109, 114, 14);
+		contentPane.add(lblStatusInscrio);
+		
+		JLabel lblStatusInscrioData = new JLabel(statusInscricao.toString());
+		lblStatusInscrioData.setBounds(431, 109, 92, 14);
+		contentPane.add(lblStatusInscrioData);
+		
+		JLabel lblEmail = DefaultComponentFactory.getInstance().createLabel("E-mail:");
+		lblEmail.setBounds(10, 186, 92, 14);
+		contentPane.add(lblEmail);
+		
+		JLabel lblEmailData = new JLabel(email.toString());
+		lblEmailData.setBounds(66, 186, 355, 14);
+		contentPane.add(lblEmailData);
+	}
+	
+	public int returnStatusInscricao(String status) {
+		int newStatus = 0;
+		if (status == "Pendente") {
+			newStatus = 2;
+		} else if (status == "Aprovado") {
+			newStatus = 1;
+		} else if (status == "Reprovado") {
+			newStatus = 0;
+		}
+		
+		return newStatus;
 	}
 }

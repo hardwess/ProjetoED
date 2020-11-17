@@ -22,7 +22,7 @@ public class InscricaoController {
 		    while ((line = br.readLine()) != null) {
 		        String[] inscricao = line.split(";");
 		        Inscricao data = new Inscricao(Long.parseLong(inscricao[0]), inscricao[2], inscricao[1], null, Integer.parseInt(inscricao[4]),
-		        		Integer.parseInt(inscricao[5]));
+		        		Integer.parseInt(inscricao[5]), inscricao[6]);
 		        lista.inserir(data);
 		    }
 		    br.close();

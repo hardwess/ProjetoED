@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOError;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -13,17 +12,16 @@ import controller.dataStructure.list.Lista;
 import model.Curriculo;
 
 public class CurriculoController {
-	final Path path = Paths.get("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\curriculo.txt");
-	public Lista<Curriculo> getListaCurriculo() {
-		Lista<Curriculo> lista = new Lista<Curriculo>();
-		
+	Lista<Curriculo> lista = new Lista<Curriculo>();
+	final Path path = Paths.get("D:\\\\Desenvolvimento\\\\ProjetoED\\\\ProjetoED\\\\src\\\\data\\curriculo.txt");
+	public Lista<Curriculo> getListaCurriculo() {		
 		try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] curriculo = line.split(";");
 		        lista.inserir(new Curriculo(
 							        		Long.parseLong(curriculo[0]), //id
-							        		curriculo[1].equals("0")? false : true,//genero
+							        		curriculo[1],//genero
 							        		Integer.parseInt(curriculo[2]), //idade
 		        							Long.parseLong(curriculo[3]))); //cpf
 		    }
@@ -47,7 +45,10 @@ public class CurriculoController {
 			
 		}
 	}
-
+	
+	public Curriculo recuperar(int posicao) {
+		return lista.recuperar(posicao);
+	}
 	
 	public static void main(String[] args) {
 		CurriculoController cc = new CurriculoController();
