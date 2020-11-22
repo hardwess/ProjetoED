@@ -6,8 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.EntrevistaController;
 import controller.InscricaoController;
 import controller.dataStructure.list.Lista;
+import model.Entrevista;
 import model.Inscricao;
 
 import java.awt.Color;
@@ -20,21 +22,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-public class DadosInscricoes extends JFrame {
+public class DadosEntrevistas extends JFrame {
 
 	private JPanel contentPane;
-	private Lista<Inscricao> lista;
+	private Lista<Entrevista> lista;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void ChamaDados(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
-			Object entrevista, Object statusCurriculo, Object statusInscricao, Object turno, Object row) {
+	public static void ChamaDados(Object id, Object nome, Object curso, Object turno, Object semestreAno, Object deficiencia, Object dataEntrevista,
+			Object statusEntrevista, Object row) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DadosInscricoes frame = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-							statusCurriculo, statusInscricao, turno, row);
+					DadosEntrevistas frame = new DadosEntrevistas(id, nome, curso, turno, semestreAno, deficiencia, dataEntrevista,
+							statusEntrevista, row);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,14 +45,14 @@ public class DadosInscricoes extends JFrame {
 		});
 	}
 	
-	public DadosInscricoes() {}
+	public DadosEntrevistas() {}
 
 	/**
 	 * Create the frame.
 	 */
-	public DadosInscricoes(Object id, Object cpf, Object rg, Object deficiencia, Object curso, Object nome, Object semestreAno,
-			Object entrevista, Object statusCurriculo, Object statusInscricao, Object turno, Object row) {
-		setTitle("Dados inscrição do candidato " + id.toString());
+	public DadosEntrevistas(Object id, Object nome, Object curso, Object turno, Object semestreAno, Object deficiencia, Object dataEntrevista,
+			Object statusEntrevista, Object row) {
+		setTitle("Dados entrevista do candidato " + id.toString());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 712, 407);
 		contentPane = new JPanel();
@@ -59,7 +61,7 @@ public class DadosInscricoes extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCandidato = new JLabel("Inscrição Candidato " + id.toString());
+		JLabel lblCandidato = new JLabel("Entrevista Candidato " + id.toString());
 		lblCandidato.setForeground(new Color(255, 160, 122));
 		lblCandidato.setFont(new Font("Arial", Font.BOLD, 26));
 		lblCandidato.setBounds(177, 11, 426, 59);
@@ -94,19 +96,18 @@ public class DadosInscricoes extends JFrame {
 		JButton btnReprovar = new JButton("Reprovar");
 		btnReprovar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InscricaoController insc = new InscricaoController();
-				insc.getListaInscricao();
-				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				EntrevistaController entrevistaController = new EntrevistaController();
+				entrevistaController.getListaEntrevista();
+				int pos = entrevistaController.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
 				if (pos > 0) {
-					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
-							curso.toString(), semestreAno.toString(),
-							null, returnStatusCurriculo(statusCurriculo.toString()),
-							0, turno.toString());
-					insc.substituir(pos-1, novoValor);
+					Entrevista novoValor = new Entrevista(Long.parseLong(id.toString()),
+							dataEntrevista.toString(),
+							0);
+					entrevistaController.substituir(pos-1, novoValor);
 				}
-				insc.saveListInscricao(insc.montaTxt());
+				entrevistaController.saveListCandidato(entrevistaController.montaTxt());
 				dispose();
-				Inscricoes view = new Inscricoes();
+				Entrevistas view = new Entrevistas();
 				view.dispose();
 				view.setVisible(true);
 			}
@@ -117,19 +118,18 @@ public class DadosInscricoes extends JFrame {
 		JButton btnAprovar = new JButton("Aprovar");
 		btnAprovar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InscricaoController insc = new InscricaoController();
-				insc.getListaInscricao();
-				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				EntrevistaController entrevistaController = new EntrevistaController();
+				entrevistaController.getListaEntrevista();
+				int pos = entrevistaController.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
 				if (pos > 0) {
-					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
-							curso.toString(), semestreAno.toString(),
-							null, returnStatusCurriculo(statusCurriculo.toString()),
-							1, turno.toString());
-					insc.substituir(pos-1, novoValor);
+					Entrevista novoValor = new Entrevista(Long.parseLong(id.toString()),
+							dataEntrevista.toString(),
+							1);
+					entrevistaController.substituir(pos-1, novoValor);
 				}
-				insc.saveListInscricao(insc.montaTxt());
+				entrevistaController.saveListCandidato(entrevistaController.montaTxt());
 				dispose();
-				Inscricoes view = new Inscricoes();
+				Entrevistas view = new Entrevistas();
 				view.dispose();
 				view.setVisible(true);
 			}
@@ -152,18 +152,5 @@ public class DadosInscricoes extends JFrame {
 		JLabel lblTurnoData = new JLabel(turno.toString());
 		lblTurnoData.setBounds(468, 182, 92, 14);
 		contentPane.add(lblTurnoData);
-	}
-	
-	public int returnStatusCurriculo(String status) {
-		int newStatus = 0;
-		if (status == "Pendente") {
-			newStatus = 2;
-		} else if (status == "Aprovado") {
-			newStatus = 1;
-		} else if (status == "Reprovado") {
-			newStatus = 0;
-		}
-		
-		return newStatus;
 	}
 }

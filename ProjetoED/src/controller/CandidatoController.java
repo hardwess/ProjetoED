@@ -51,6 +51,10 @@ public class CandidatoController {
 		}
 	}
 	
+	public int retornaTamanho() {
+		return lista.tamanho();
+	}
+	
 	public static void main(String[] args) {
 		CandidatoController cc = new CandidatoController();
 		System.out.println(cc.getListaCandidato().toString());

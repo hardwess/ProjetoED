@@ -3,6 +3,7 @@ package controller.dataStructure.list;
 import javax.swing.JOptionPane;
 
 import model.Candidato;
+import model.Entrevista;
 import model.Inscricao;
 
 public class Lista<T> {
@@ -10,6 +11,7 @@ public class Lista<T> {
 	private No<T> ultimoNo;
 	private int tamanho;
 	private Inscricao[] data;
+	private Entrevista[] entrevista;
 	private String resultSearch;
 	private int posicaoEncontrada;
 	
@@ -144,7 +146,7 @@ public class Lista<T> {
 	}
 	
 	public int buscaSequencial(Long id, int count, int n, boolean found) {
-		data = convertToVector();
+		data = convertToVectorInscricao();
 
 		if (data != null && found == false) {
 			if (!id.equals(data[count].getIdCandidato()) && count < n-1 && found == false) {
@@ -164,7 +166,7 @@ public class Lista<T> {
 		return posicaoEncontrada;
 	}
 	
-	public Inscricao[] convertToVector() {
+	public Inscricao[] convertToVectorInscricao() {
 		No auxl = primeiroNo;
 		int count = 0;
 		int size = tamanho();
@@ -176,6 +178,41 @@ public class Lista<T> {
 		}
 
 		return data;
+	}
+	
+	public Entrevista[] convertToVectorEntrevista() {
+		No auxl = primeiroNo;
+		int count = 0;
+		int size = tamanho();
+		Entrevista[] data = new Entrevista[size];
+		while (auxl != null) {
+			data[count] = (Entrevista) auxl.getValor();
+			auxl = auxl.getProximo();
+			count++;
+		}
+
+		return data;
+	}
+	
+	public int buscaSequencialEntrevista(Long id, int count, int n, boolean found) {
+		entrevista = convertToVectorEntrevista();
+
+		if (entrevista != null && found == false) {
+			if (!id.equals(entrevista[count].getId()) && count < n-1 && found == false) {
+				count += 1;
+				buscaSequencial(id, count, n, false);
+			} else if (id.equals(entrevista[count].getId())) {
+				found = true;
+				posicaoEncontrada = count + 1;
+				resultSearch = "A entrevista foi encontrada na posição: " + posicaoEncontrada + "\n";
+				return posicaoEncontrada;
+			} else if (found == false) {
+				resultSearch = "Entrevista não encontrada. Tente novamente.";
+				JOptionPane.showMessageDialog(null, resultSearch);
+			}
+		}
+		
+		return posicaoEncontrada;
 	}
 	
 	public void substituir(int pos, T valor) {

@@ -158,8 +158,8 @@ public class Curriculos extends JFrame {
 		modelo.addColumn("Status Inscrição");
 		modelo.addColumn("Deficiência");
 		modelo.addColumn("E-mail");
-		if (inscricaoController.estaVazia()) {
-			modelo.addRow(new String[] {"Sem informações", "Sem informações"});
+		if (curriculoController.estaVazia()) {
+			JOptionPane.showMessageDialog(null, "Sem currículos para avaliação.");
 		} else {
 			for (int i = 0; i < inscricaoController.retornaTamanho(); i++) {
 				candidato = candidatoController.recuperar(i);

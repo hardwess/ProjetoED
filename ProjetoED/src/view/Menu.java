@@ -66,6 +66,12 @@ public class Menu extends JFrame {
 		contentPane.add(btnCurriculos);
 		
 		JButton btnEntrevistas = new JButton("ENTREVISTAS");
+		btnEntrevistas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Entrevistas entrevista = new Entrevistas();
+				entrevista.setVisible(true);
+			}
+		});
 		btnEntrevistas.setBackground(new Color(255, 160, 122));
 		btnEntrevistas.setBounds(25, 140, 246, 45);
 		contentPane.add(btnEntrevistas);

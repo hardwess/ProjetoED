@@ -50,6 +50,14 @@ public class CurriculoController {
 		return lista.recuperar(posicao);
 	}
 	
+	public int retornaTamanho() {
+		return lista.tamanho();
+	}
+	
+	public boolean estaVazia() {
+		return lista.estaVazia();
+	}
+	
 	public static void main(String[] args) {
 		CurriculoController cc = new CurriculoController();
 //		System.out.println(cc.getListaCurriculo().montaTxt());

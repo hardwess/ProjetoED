@@ -1,7 +1,5 @@
 package controller.dataStructure.list;
 
-import model.Inscricao;
-
 public class No<T> {
 	private T valor;
 	private No<T> proximo;
@@ -15,7 +13,7 @@ public class No<T> {
 		return this.proximo;
 	}
 
-	public void setProximo(No proximo) {
+	public void setProximo(No<T> proximo) {
 		this.proximo = proximo;
 	}
 

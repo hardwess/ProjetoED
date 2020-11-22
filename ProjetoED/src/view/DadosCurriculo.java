@@ -7,17 +7,24 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.EntrevistaController;
 import controller.InscricaoController;
 import controller.dataStructure.list.Lista;
+import model.Entrevista;
 import model.Inscricao;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
@@ -127,6 +134,7 @@ public class DadosCurriculo extends JFrame {
 								null, 1,
 								returnStatusInscricao(statusInscricao.toString()), dado.getTurno());
 					insc.substituir(pos-1, novoValor);
+					informaData(novoValor);
 				}
 				insc.saveListInscricao(insc.montaTxt());
 				dispose();
@@ -166,5 +174,18 @@ public class DadosCurriculo extends JFrame {
 		}
 		
 		return newStatus;
+	}
+	
+	private void informaData(Inscricao dadosInscricao) {
+		String data = JOptionPane.showInputDialog("Informe um dia para a realização da entrevista (dd/MM/yyyy):");
+		inserirEntrevista(dadosInscricao, data);
+	}
+	
+	private void inserirEntrevista(Inscricao dadosInscricao, String data) {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Entrevista entrevista = new Entrevista(dadosInscricao.getIdCandidato(), data, 2);
+		EntrevistaController entrevistaController = new EntrevistaController();
+		entrevistaController.inserirEntrevista(entrevista);
+		entrevistaController.saveListCandidato(entrevistaController.montaTxt());
 	}
 }
