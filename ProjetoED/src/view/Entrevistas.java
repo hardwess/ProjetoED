@@ -135,16 +135,18 @@ public class Entrevistas extends JFrame {
 				if (pos > 0) {
 					dados = inscricaoController.recuperar(pos-1);
 					candidato = candidatoController.recuperar(pos-1);
-					modelo.addRow(new String[] {
-							candidato.getIdCandidato().toString(),
-							candidato.getNome(),
-							dados.getCurso(),
-							dados.getTurno(),
-							dados.getSemestreAno(),
-							candidato.getDeficiencia(),
-							entrevista.getDataEntrevista(),
-							entrevista.getStatusEntrevista()
-					});
+					if(!"Aprovado".equals(entrevista.getStatusEntrevista())) {
+						modelo.addRow(new String[] {
+								candidato.getIdCandidato().toString(),
+								candidato.getNome(),
+								dados.getCurso(),
+								dados.getTurno(),
+								dados.getSemestreAno(),
+								candidato.getDeficiencia(),
+								entrevista.getDataEntrevista(),
+								entrevista.getStatusEntrevista()
+						});
+					}
 				}
 			}
 		}

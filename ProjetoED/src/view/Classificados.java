@@ -2,44 +2,47 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.util.Date;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.border.LineBorder;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import controller.CandidatoController;
-import controller.CurriculoController;
 import controller.InscricaoController;
+import controller.dataStructure.list.Lista;
 import model.Candidato;
-import model.Curriculo;
 import model.Inscricao;
 
-public class Curriculos extends JFrame {
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+public class Classificados extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
-	/**
-	 * Launch the application.
-	 */
+	private Lista<Inscricao> lista = new Lista<Inscricao>();
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Curriculos frame = new Curriculos();
+					Classificados frame = new Classificados();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,12 +51,9 @@ public class Curriculos extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public Curriculos() {	
+	public Classificados() {
 		this.setExtendedState(MAXIMIZED_BOTH);
-		setTitle("Curr\u00EDculos");
+		setTitle("Inscrições");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 687, 480);
 		contentPane = new JPanel();
@@ -61,9 +61,9 @@ public class Curriculos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblListaDeCurrculos = new JLabel("Lista de curr\u00EDculos pendentes de avalia\u00E7\u00E3o");
-		lblListaDeCurrculos.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblListaDeCurrculos.setForeground(new Color(255, 160, 122));
+		JLabel lblListaDeInscricoes = new JLabel("Lista de inscrições pendentes de avalia\u00E7\u00E3o");
+		lblListaDeInscricoes.setFont(new Font("Arial", Font.PLAIN, 18));
+		lblListaDeInscricoes.setForeground(new Color(255, 160, 122));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -73,7 +73,7 @@ public class Curriculos extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(5)
-							.addComponent(lblListaDeCurrculos, GroupLayout.PREFERRED_SIZE, 352, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lblListaDeInscricoes, GroupLayout.PREFERRED_SIZE, 352, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)))
@@ -83,28 +83,27 @@ public class Curriculos extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(6)
-					.addComponent(lblListaDeCurrculos, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+					.addComponent(lblListaDeInscricoes)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		
+				
 		criaJTable();
 		
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	
-	private void criaJTable() {
+	public void criaJTable() {
 		table = new JTable();
-		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
+		table.setColumnSelectionAllowed(true);
 		organizaJTable();
-		selecionaCurriculo();
+		selecionaInscricao();
 	}
 	
-	private void selecionaCurriculo() {
+	private void selecionaInscricao() {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override public void valueChanged(ListSelectionEvent evt) {
 				if (evt.getValueIsAdjusting())
@@ -114,70 +113,67 @@ public class Curriculos extends JFrame {
 					Object nome = table.getModel().getValueAt(row, 1);
 					Object cpf = table.getModel().getValueAt(row, 2);
 					Object rg = table.getModel().getValueAt(row, 3);
-					Object genero = table.getModel().getValueAt(row, 4);
-					Object idade = table.getModel().getValueAt(row, 5);
-					Object statusCurriculo = table.getModel().getValueAt(row, 6);
-					Object statusInscricao = table.getModel().getValueAt(row, 7);
-					Object deficiencia = table.getModel().getValueAt(row, 8);
-					Object email = table.getModel().getValueAt(row, 9);
-					if (statusCurriculo == "Pendente") {
-						DadosCurriculo frameDadosCurriculo = new DadosCurriculo(id, cpf, rg, deficiencia, nome, genero, idade,
-								statusCurriculo, statusInscricao, email, row);
-						frameDadosCurriculo.ChamaDados(id, cpf, rg, deficiencia, nome, genero, idade,
-								statusCurriculo, statusInscricao, email, row);
+					Object semestreAno = table.getModel().getValueAt(row, 4);
+					Object curso = table.getModel().getValueAt(row, 5);
+					Object turno = table.getModel().getValueAt(row, 6);
+					Object entrevista = table.getModel().getValueAt(row, 7);
+					Object statusCurriculo = table.getModel().getValueAt(row, 8);
+					Object statusInscricao = table.getModel().getValueAt(row, 9);
+					Object deficiencia = table.getModel().getValueAt(row, 10);
+					if (statusInscricao == "Pendente") {
+						DadosInscricoes frameDadosInscricoes = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+								statusCurriculo, statusInscricao, turno, row);
+						frameDadosInscricoes.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
+								statusCurriculo, statusInscricao, turno, row);
 						dispose();
 					} else {
-						JOptionPane.showMessageDialog(null, "Esse currículo já foi avaliado. Tente outro.");
+						JOptionPane.showMessageDialog(null, "Essa inscrição já foi avaliada. Tente outra.");
 					}
 				}
 			}
 		);
 	}
 	
-	
 	private void organizaJTable() {
 		Candidato candidato;
 		Inscricao dados;
-		Curriculo curriculo;
 		DefaultTableModel modelo = new DefaultTableModel();
 		CandidatoController candidatoController = new CandidatoController();
 		InscricaoController inscricaoController = new InscricaoController();
-		CurriculoController curriculoController = new CurriculoController();
 		
 		candidatoController.getListaCandidato();
 		inscricaoController.getListaInscricao();
-		curriculoController.getListaCurriculo();
 		
 		modelo.addColumn("Id do candidato");
 		modelo.addColumn("Nome");
 		modelo.addColumn("CPF");
 		modelo.addColumn("RG");
-		modelo.addColumn("Gênero");
-		modelo.addColumn("Idade");
+		modelo.addColumn("Semestre/Ano");
+		modelo.addColumn("Curso");
+		modelo.addColumn("Turno");
+		modelo.addColumn("Entrevista");
 		modelo.addColumn("Status Currículo");
 		modelo.addColumn("Status Inscrição");
 		modelo.addColumn("Deficiência");
-		modelo.addColumn("E-mail");
-		if (curriculoController.estaVazia()) {
-			JOptionPane.showMessageDialog(null, "Sem currículos para avaliação.");
+		if (inscricaoController.estaVazia()) {
+			modelo.addRow(new String[] {"Sem informações", "Sem informações"});
 		} else {
 			for (int i = 0; i < inscricaoController.retornaTamanho(); i++) {
 				candidato = candidatoController.recuperar(i);
 				dados = inscricaoController.recuperar(i);
-				curriculo = curriculoController.recuperar(i);
-				if ((dados.getStatusInscricao().toString() == "Aprovado") && (!"Aprovado".equals(dados.getStatusCurriculo()))) {
+				if("Aprovado".equals(dados.getStatusCurriculo())) {
 					modelo.addRow(new String[] {
 							candidato.getIdCandidato().toString(),
 							candidato.getNome(),
 							candidato.getCpf(),
 							candidato.getRg(),
-							curriculo.getGenero(),
-							curriculo.getIdade().toString(),
-							dados.getStatusCurriculo().toString(),
-							dados.getStatusInscricao().toString(),
+							dados.getSemestreAno(),
+							dados.getCurso(),
+							dados.getTurno(),
+							null,
+							dados.getStatusCurriculo(),
+							dados.getStatusInscricao(),
 							candidato.getDeficiencia(),
-							candidato.getEmail()
-							//Mostrar documentos
 					});
 				}
 			}

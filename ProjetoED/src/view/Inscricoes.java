@@ -161,19 +161,21 @@ public class Inscricoes extends JFrame {
 			for (int i = 0; i < inscricaoController.retornaTamanho(); i++) {
 				candidato = candidatoController.recuperar(i);
 				dados = inscricaoController.recuperar(i);
-				modelo.addRow(new String[] {
-						candidato.getIdCandidato().toString(),
-						candidato.getNome(),
-						candidato.getCpf(),
-						candidato.getRg(),
-						dados.getSemestreAno(),
-						dados.getCurso(),
-						dados.getTurno(),
-						null,
-						dados.getStatusCurriculo(),
-						dados.getStatusInscricao(),
-						candidato.getDeficiencia(),
-				});
+				if(!"Aprovado".equals(dados.getStatusInscricao())) {
+					modelo.addRow(new String[] {
+							candidato.getIdCandidato().toString(),
+							candidato.getNome(),
+							candidato.getCpf(),
+							candidato.getRg(),
+							dados.getSemestreAno(),
+							dados.getCurso(),
+							dados.getTurno(),
+							null,
+							dados.getStatusCurriculo(),
+							dados.getStatusInscricao(),
+							candidato.getDeficiencia(),
+					});
+				}
 			}
 		}
 		

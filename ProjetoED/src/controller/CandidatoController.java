@@ -14,7 +14,7 @@ import model.Curriculo;
 import model.Inscricao;
 
 public class CandidatoController {
-	final Path path = Paths.get("D:\\Desenvolvimento\\ProjetoED\\ProjetoED\\src\\data\\candidato.txt");
+	final Path path = Paths.get("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\candidato.txt");
 	Lista<Candidato> lista = new Lista<Candidato>();
 	
 	public Lista<Candidato> getListaCandidato() {
