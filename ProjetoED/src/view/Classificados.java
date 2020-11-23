@@ -22,8 +22,10 @@ import javax.swing.table.TableColumn;
 
 import controller.CandidatoController;
 import controller.InscricaoController;
+import controller.MergeSort;
 import controller.dataStructure.list.Lista;
 import model.Candidato;
+import model.DadosGerais;
 import model.Inscricao;
 
 import javax.swing.GroupLayout;
@@ -100,82 +102,52 @@ public class Classificados extends JFrame {
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
 		organizaJTable();
-		selecionaInscricao();
-	}
-	
-	private void selecionaInscricao() {
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			@Override public void valueChanged(ListSelectionEvent evt) {
-				if (evt.getValueIsAdjusting())
-					return; int row = table.getSelectedRow();
-					int column = table.getSelectedColumn();
-					Object id = table.getModel().getValueAt(row, 0);
-					Object nome = table.getModel().getValueAt(row, 1);
-					Object cpf = table.getModel().getValueAt(row, 2);
-					Object rg = table.getModel().getValueAt(row, 3);
-					Object semestreAno = table.getModel().getValueAt(row, 4);
-					Object curso = table.getModel().getValueAt(row, 5);
-					Object turno = table.getModel().getValueAt(row, 6);
-					Object entrevista = table.getModel().getValueAt(row, 7);
-					Object statusCurriculo = table.getModel().getValueAt(row, 8);
-					Object statusInscricao = table.getModel().getValueAt(row, 9);
-					Object deficiencia = table.getModel().getValueAt(row, 10);
-					if (statusInscricao == "Pendente") {
-						DadosInscricoes frameDadosInscricoes = new DadosInscricoes(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-								statusCurriculo, statusInscricao, turno, row);
-						frameDadosInscricoes.ChamaDados(id, cpf, rg, deficiencia, curso, nome, semestreAno, entrevista,
-								statusCurriculo, statusInscricao, turno, row);
-						dispose();
-					} else {
-						JOptionPane.showMessageDialog(null, "Essa inscrição já foi avaliada. Tente outra.");
-					}
-				}
-			}
-		);
 	}
 	
 	private void organizaJTable() {
-		Candidato candidato;
-		Inscricao dados;
 		DefaultTableModel modelo = new DefaultTableModel();
-		CandidatoController candidatoController = new CandidatoController();
-		InscricaoController inscricaoController = new InscricaoController();
 		
-		candidatoController.getListaCandidato();
-		inscricaoController.getListaInscricao();
+		MergeSort dadosMergeSort = new MergeSort();
 		
-		modelo.addColumn("Id do candidato");
+		DadosGerais[] lista = dadosMergeSort.getListaGeral();
+		
 		modelo.addColumn("Nome");
 		modelo.addColumn("CPF");
 		modelo.addColumn("RG");
+		modelo.addColumn("Deficiencia");
+		modelo.addColumn("E-mail");
+		modelo.addColumn("Genero");
+		modelo.addColumn("Idade");
+		modelo.addColumn("Data Entrevista");
+		modelo.addColumn("Status Entrevista");
+		modelo.addColumn("Status Currículo");
 		modelo.addColumn("Semestre/Ano");
 		modelo.addColumn("Curso");
-		modelo.addColumn("Turno");
-		modelo.addColumn("Entrevista");
-		modelo.addColumn("Status Currículo");
+		modelo.addColumn("Status Curriculo");
 		modelo.addColumn("Status Inscrição");
-		modelo.addColumn("Deficiência");
-		if (inscricaoController.estaVazia()) {
+		modelo.addColumn("Turno");
+		
+		if (lista.length == 0) {
 			modelo.addRow(new String[] {"Sem informações", "Sem informações"});
 		} else {
-			for (int i = 0; i < inscricaoController.retornaTamanho(); i++) {
-				candidato = candidatoController.recuperar(i);
-				dados = inscricaoController.recuperar(i);
-				if("Aprovado".equals(dados.getStatusCurriculo())) {
-					modelo.addRow(new String[] {
-							candidato.getIdCandidato().toString(),
-							candidato.getNome(),
-							candidato.getCpf(),
-							candidato.getRg(),
-							dados.getSemestreAno(),
-							dados.getCurso(),
-							dados.getTurno(),
-							null,
-							dados.getStatusCurriculo(),
-							dados.getStatusInscricao(),
-							candidato.getDeficiencia(),
-					});
-				}
+			for (int i = 0; i < lista.length; i++) {
+				modelo.addRow(new String[] {
+						lista[i].getNome(),
+						lista[i].getCpf(),
+						lista[i].getRg(),
+						lista[i].getDeficiencia(),
+						lista[i].getEmail(),
+						lista[i].getGenero(),
+						String.valueOf(lista[i].getIdade()),
+						lista[i].getDataEntrevista(),
+						lista[i].getStatusEntrevista(),
+						lista[i].getStatusCurriculo(),
+						lista[i].getSemestreAno(),
+						lista[i].getCurso(),
+						lista[i].getStatusCurriculo(),
+						lista[i].getStatusInscricao(),
+						lista[i].getTurno()
+				});
 			}
 		}
 		

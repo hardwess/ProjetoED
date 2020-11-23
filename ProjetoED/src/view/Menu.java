@@ -77,6 +77,12 @@ public class Menu extends JFrame {
 		contentPane.add(btnEntrevistas);
 		
 		JButton btnClassificados = new JButton("CLASSIFICADOS");
+		btnClassificados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Classificados classificados = new Classificados();
+				classificados.setVisible(true);
+			}
+		});
 		btnClassificados.setBackground(new Color(255, 160, 122));
 		btnClassificados.setBounds(291, 140, 246, 45);
 		contentPane.add(btnClassificados);
