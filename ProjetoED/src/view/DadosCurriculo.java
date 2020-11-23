@@ -102,7 +102,7 @@ public class DadosCurriculo extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				InscricaoController insc = new InscricaoController();
 				insc.getListaInscricao();
-				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(id.toString()));
 				if (pos > 0) {
 					Inscricao dado = insc.recuperar(pos-1);
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
@@ -126,7 +126,7 @@ public class DadosCurriculo extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				InscricaoController insc = new InscricaoController();
 				insc.getListaInscricao();
-				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(id.toString()));
 				if (pos > 0) {
 					Inscricao dado = insc.recuperar(pos-1);
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
@@ -182,7 +182,6 @@ public class DadosCurriculo extends JFrame {
 	}
 	
 	private void inserirEntrevista(Inscricao dadosInscricao, String data) {
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		Entrevista entrevista = new Entrevista(dadosInscricao.getIdCandidato(), data, 2);
 		EntrevistaController entrevistaController = new EntrevistaController();
 		entrevistaController.inserirEntrevista(entrevista);

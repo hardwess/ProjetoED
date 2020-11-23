@@ -200,7 +200,7 @@ public class Lista<T> {
 		if (entrevista != null && found == false) {
 			if (!id.equals(entrevista[count].getId()) && count < n-1 && found == false) {
 				count += 1;
-				buscaSequencial(id, count, n, false);
+				buscaSequencialEntrevista(id, count, n, false);
 			} else if (id.equals(entrevista[count].getId())) {
 				found = true;
 				posicaoEncontrada = count + 1;

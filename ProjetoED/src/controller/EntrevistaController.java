@@ -52,7 +52,12 @@ public class EntrevistaController {
 	}
 	
 	public void inserirEntrevista(Entrevista entrevista) {
-		lista.inserir(entrevista);
+		getListaEntrevista();
+		if (estaVazia()) {
+			lista.inserir(entrevista);
+		} else {
+			lista.inserirUltimo(entrevista);
+		}
 	}
 	
 	public int contem(Long id, int row) {

@@ -130,20 +130,22 @@ public class Entrevistas extends JFrame {
 			JOptionPane.showMessageDialog(null, "Sem entrevistas marcadas");
 		} else {
 			for (int i = 0; i < entrevistaController.retornaTamanho(); i++) {
-				candidato = candidatoController.recuperar(i);
-				dados = inscricaoController.recuperar(i);
-				curriculo = curriculoController.recuperar(i);
 				entrevista = entrevistaController.recuperar(i);
-				modelo.addRow(new String[] {
-						candidato.getIdCandidato().toString(),
-						candidato.getNome(),
-						dados.getCurso(),
-						dados.getTurno(),
-						dados.getSemestreAno(),
-						candidato.getDeficiencia(),
-						entrevista.getDataEntrevista(),
-						entrevista.getStatusEntrevista()
-				});
+				int pos = inscricaoController.contem(Long.parseLong(entrevista.getId().toString()), Integer.parseInt(entrevista.getId().toString()));
+				if (pos > 0) {
+					dados = inscricaoController.recuperar(pos-1);
+					candidato = candidatoController.recuperar(pos-1);
+					modelo.addRow(new String[] {
+							candidato.getIdCandidato().toString(),
+							candidato.getNome(),
+							dados.getCurso(),
+							dados.getTurno(),
+							dados.getSemestreAno(),
+							candidato.getDeficiencia(),
+							entrevista.getDataEntrevista(),
+							entrevista.getStatusEntrevista()
+					});
+				}
 			}
 		}
 		
