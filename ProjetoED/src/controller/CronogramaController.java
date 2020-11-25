@@ -11,7 +11,7 @@ import model.Cronograma;
 public class CronogramaController {
 	public Lista<Cronograma> getListaCronograma() {
 		Lista<Cronograma> lista = new Lista<Cronograma>();
-		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\cronograma.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("D:\\Desenvolvimento\\ProjetoED\\ProjetoED\\src\\data\\cronograma.txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] cronograma = line.split(";");

@@ -1,5 +1,5 @@
 1;2/2020;Analise e Desenvolvimento de Sistemas;null;1;1;Noite
-2;2/2020;Ciencia da Computacao;null;2;2;Manha
+2;2/2020;Ciencia da Computacao;null;1;1;Manha
 3;2/2020;Ciencia da Computacao;null;2;2;Tarde
 4;2/2020;Ciencia da Computacao;null;2;2;Noite
 5;2/2020;Analise e Desenvolvimento de Sistemas;null;2;2;Manha

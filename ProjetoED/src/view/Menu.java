@@ -40,14 +40,14 @@ public class Menu extends JFrame {
 	public Menu() {
 		setTitle("Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 576, 391);
+		setBounds(100, 100, 576, 307);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 235, 205));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblBemVindoa = new JLabel("NOME DO USUÁRIO");
+		JLabel lblBemVindoa = new JLabel("OP\u00C7\u00D5ES DE MENU");
 		lblBemVindoa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBemVindoa.setForeground(new Color(255, 160, 122));
 		lblBemVindoa.setFont(new Font("Arial", Font.BOLD, 26));
@@ -87,15 +87,6 @@ public class Menu extends JFrame {
 		btnClassificados.setBounds(291, 140, 246, 45);
 		contentPane.add(btnClassificados);
 		
-		JButton btnCronograma = new JButton("CRONOGRAMA DE ENTREVISTAS");
-		btnCronograma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnCronograma.setBackground(new Color(255, 160, 122));
-		btnCronograma.setBounds(25, 207, 512, 45);
-		contentPane.add(btnCronograma);
-		
 		JButton btnInscricoes = new JButton("INSCRI\u00C7\u00D5ES");
 		btnInscricoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,7 +107,7 @@ public class Menu extends JFrame {
 		});
 		
 		btnSair.setBackground(new Color(255, 160, 122));
-		btnSair.setBounds(25, 275, 512, 45);
+		btnSair.setBounds(25, 211, 512, 45);
 		contentPane.add(btnSair);
 	}
 

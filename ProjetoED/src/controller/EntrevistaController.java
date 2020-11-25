@@ -18,7 +18,7 @@ import model.Inscricao;
 
 public class EntrevistaController {
 	Lista<Entrevista> lista = new Lista<Entrevista>();
-	final Path path = Paths.get("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\entrevista.txt");
+	final Path path = Paths.get("D:\\Desenvolvimento\\ProjetoED\\ProjetoED\\src\\data\\entrevista.txt");
 	
 	public Lista<Entrevista> getListaEntrevista() {
 		try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {

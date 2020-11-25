@@ -63,7 +63,7 @@ public class Classificados extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblListaDeInscricoes = new JLabel("Lista de inscrições pendentes de avalia\u00E7\u00E3o");
+		JLabel lblListaDeInscricoes = new JLabel("Lista de Classificados");
 		lblListaDeInscricoes.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblListaDeInscricoes.setForeground(new Color(255, 160, 122));
 		

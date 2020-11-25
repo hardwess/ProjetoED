@@ -13,7 +13,7 @@ import model.Candidato;
 import model.Inscricao;
 
 public class InscricaoController {
-	final Path path = Paths.get("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\inscricao.txt");
+	final Path path = Paths.get("D:\\Desenvolvimento\\ProjetoED\\ProjetoED\\src\\data\\inscricao.txt");
 	Lista<Inscricao> lista = new Lista<Inscricao>();
 	
 	public Lista<Inscricao> getListaInscricao() {
@@ -59,7 +59,7 @@ public class InscricaoController {
 	}
 	
 	public int contem(Long id, int row) {
-		return lista.buscaSequencial(id, 0, row+1, false);
+		return lista.buscaSequencial(id, 0, row, false);
 	}
 	
 	public void substituir(int pos, Inscricao e) {

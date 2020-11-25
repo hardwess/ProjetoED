@@ -13,7 +13,7 @@ import model.Curriculo;
 
 public class CurriculoController {
 	Lista<Curriculo> lista = new Lista<Curriculo>();
-	final Path path = Paths.get("C:\\Users\\macie\\Documents\\FATEC 2020-2Semestre\\Estrutura de dados\\ProjetoED\\ProjetoED\\src\\data\\curriculo.txt");
+	final Path path = Paths.get("D:\\Desenvolvimento\\ProjetoED\\ProjetoED\\src\\data\\curriculo.txt");
 	public Lista<Curriculo> getListaCurriculo() {		
 		try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
 		    String line;
