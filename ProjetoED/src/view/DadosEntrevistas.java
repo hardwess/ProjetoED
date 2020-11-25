@@ -98,7 +98,7 @@ public class DadosEntrevistas extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				EntrevistaController entrevistaController = new EntrevistaController();
 				entrevistaController.getListaEntrevista();
-				int pos = entrevistaController.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				int pos = entrevistaController.contem(Long.parseLong(id.toString()), Integer.parseInt(id.toString()));
 				if (pos > 0) {
 					Entrevista novoValor = new Entrevista(Long.parseLong(id.toString()),
 							dataEntrevista.toString(),
