@@ -61,7 +61,7 @@ public class EntrevistaController {
 	}
 	
 	public int contem(Long id, int row) {
-		return lista.buscaSequencialEntrevista(id, 0, row+1, false);
+		return lista.buscaSequencialEntrevista(id, 0, row, false);
 	}
 	
 	public String montaTxt() {
