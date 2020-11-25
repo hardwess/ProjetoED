@@ -64,7 +64,7 @@ public class MergeSort {
 			}
 		}
 
-//    	mergeSort(lista, 1, lista.length);
+    	mergeSort(lista, 0, lista.length-1);
 		return lista;
 	}
 
@@ -87,7 +87,7 @@ public class MergeSort {
 		int j = 0;
 
 		while (i1 <= mid && i2 <= to) {
-			if (a[i1].getNome().compareTo(a[i2].getNome()) < 0) {
+			if (a[i1].getNome().compareToIgnoreCase(a[i2].getNome()) < 0) {
 				b[j] = a[i1];
 				i1++;
 			} else {
