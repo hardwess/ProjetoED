@@ -37,7 +37,7 @@ public class EntrevistaController {
 		return lista;
 	}
 	
-	public void saveListCandidato(String lista) {
+	public void saveListEntrevista(String lista) {
 		try {
 			BufferedWriter bw = null;
 			File file = new File(path.toString());

@@ -55,7 +55,7 @@ public class Classificados extends JFrame {
 
 	public Classificados() {
 		this.setExtendedState(MAXIMIZED_BOTH);
-		setTitle("Inscrições");
+		setTitle("Classificados");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 687, 480);
 		contentPane = new JPanel();

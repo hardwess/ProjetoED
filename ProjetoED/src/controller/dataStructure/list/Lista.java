@@ -220,19 +220,16 @@ public class Lista<T> {
 		
 		if (pos == 0) {
 			this.primeiroNo.setValor(valor);
-			System.out.println("VALOR 0 " + this.primeiroNo.getValor());
 		} else {
 			No<T> aux = primeiroNo.getProximo();
 			if (aux != null) {
 				while (count != pos) {
 					count++;
 					aux = aux.getProximo();
-					/**System.out.println("VALOR " + aux.getValor());**/
 				}
 				
 				if (count == pos) {
 					aux.setValor(valor);
-					/**System.out.println("VALOR 1 " + aux.getValor());**/
 				}
 			}
 		}

@@ -185,6 +185,6 @@ public class DadosCurriculo extends JFrame {
 		Entrevista entrevista = new Entrevista(dadosInscricao.getIdCandidato(), data, 2);
 		EntrevistaController entrevistaController = new EntrevistaController();
 		entrevistaController.inserirEntrevista(entrevista);
-		entrevistaController.saveListCandidato(entrevistaController.montaTxt());
+		entrevistaController.saveListEntrevista(entrevistaController.montaTxt());
 	}
 }

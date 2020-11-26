@@ -96,7 +96,7 @@ public class DadosInscricoes extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				InscricaoController insc = new InscricaoController();
 				insc.getListaInscricao();
-				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(row.toString()));
+				int pos = insc.contem(Long.parseLong(id.toString()), Integer.parseInt(id.toString()));
 				if (pos > 0) {
 					Inscricao novoValor = new Inscricao(Long.parseLong(id.toString()),
 							curso.toString(), semestreAno.toString(),

@@ -105,7 +105,7 @@ public class DadosEntrevistas extends JFrame {
 							0);
 					entrevistaController.substituir(pos-1, novoValor);
 				}
-				entrevistaController.saveListCandidato(entrevistaController.montaTxt());
+				entrevistaController.saveListEntrevista(entrevistaController.montaTxt());
 				dispose();
 				Entrevistas view = new Entrevistas();
 				view.dispose();
@@ -127,7 +127,7 @@ public class DadosEntrevistas extends JFrame {
 							1);
 					entrevistaController.substituir(pos-1, novoValor);
 				}
-				entrevistaController.saveListCandidato(entrevistaController.montaTxt());
+				entrevistaController.saveListEntrevista(entrevistaController.montaTxt());
 				dispose();
 				Entrevistas view = new Entrevistas();
 				view.dispose();
